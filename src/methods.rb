@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-require 'json'
 require 'cgi'
-require 'uri'
 require 'fileutils'
+require 'json'
+require 'uri'
 
+TOOL_PATH = '/usr/local/bin/bearing'
 
 def call_bear(action: '', call_id: '', params: {})
   uri = [
@@ -18,8 +19,30 @@ def call_bear(action: '', call_id: '', params: {})
   system("open '#{uri}'")
 end
 
-def remove_tmp_folder(call_id = '')
-  FileUtils.remove_dir(unique_tmp_folder(call_id))
+def create_shell_integration
+  orig = File.dirname(__FILE__) + '/src/bearing.rb'
+  FileUtils.ln_s(orig, TOOL_PATH)
+end
+
+def params_to_url_params(params = {})
+  params.map do |k, v|
+    next unless k && v
+    CGI::escape(k) + '=' + CGI::escape(v)
+  end.compact.join('&')
+end
+
+def print_menu_items
+  option = File.exist?(TOOL_PATH) ? 'Uninstall' : 'Install'
+
+  puts <<EOTXT
+DISABLED|Bearing, a scripting helper for Bear.
+DISABLED|Made with ❤️ in Munich in 2020
+DISABLED|by Carlo Zottmann <carlo@zottmann.org>
+----
+#{option} #{TOOL_PATH}
+----
+DISABLED|Be excellent to eachother!
+EOTXT
 end
 
 def print_usage
@@ -47,19 +70,20 @@ Examples:
 EOTXT
 end
 
-def params_to_url_params(params = {})
-  params.map do |k, v|
-    next unless k && v
-    CGI::escape(k) + '=' + CGI::escape(v)
-  end.compact.join('&')
-end
-
 def query_to_json(query_str = '', success: false)
   res = Hash[
     CGI::parse(query_str).map {|k, v| [k, (JSON.parse(v[0]) rescue v[0])] }
   ]
   res[:_success] = success
   res.to_json
+end
+
+def remove_shell_integration
+  FileUtils.remove(TOOL_PATH)
+end
+
+def remove_tmp_folder(call_id = '')
+  FileUtils.remove_dir(unique_tmp_folder(call_id))
 end
 
 def translate_args_to_hash(args = [])
@@ -93,4 +117,15 @@ ERROR: first argument (action) must be one of …
 Call '#{$0} --help' for usage information
 EOTXT
   exit 1
+end
+
+def write_incoming_data_to_tmp_file(uri_string = '')
+  uri = URI.parse(uri_string)
+  call_id = uri.host
+  is_success = (uri.path == '/success')
+
+  tmp_filename = unique_tmp_file(call_id)
+  output = query_to_json(uri.query, success: is_success)
+
+  File.open(tmp_filename, 'w') { |f| f.puts output }
 end
