@@ -1,24 +1,46 @@
 #!/usr/bin/ruby
 
 require 'securerandom'
-require './methods.rb'
+require 'timeout'
+require_relative 'methods.rb'
 
 AVAILABLE_ACTIONS = %w(
   open-note create add-text add-file tags open-tag rename-tag delete-tag trash
   archive untagged todo today locked search grab-url change-theme change-font
 )
 
-call_id = SecureRandom.uuid
-# tmp_folder = unique_tmp_folder(call_id)
-
 action, *args = ARGV
+call_id = SecureRandom.uuid
 
-validate_action!(action)
-params = translate_args_to_hash(args)
+validate_action_argument!(action)
 
-p action
-p params
+call_bear(
+  action: action,
+  call_id: call_id,
+  params: translate_args_to_hash(args)
+)
 
-call_bear(action: action, call_id: call_id, params: params)
+json_data = nil
 
-# clean_up_tmp(call_id)
+begin
+  res = nil
+  tmp_filename = unique_tmp_file(call_id)
+
+  Timeout::timeout(3) do
+    while !res do
+      if File.exist?(tmp_filename)
+        res = File.read(tmp_filename)
+      else
+        sleep 0.4
+      end
+    end
+  end
+
+  json_data = res
+rescue Timeout::Error
+  json_data = ({ _success: false, _timeout: true }).to_json
+end
+
+remove_tmp_folder(call_id)
+
+puts json_data

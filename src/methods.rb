@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+require 'json'
 require 'cgi'
+require 'uri'
 require 'fileutils'
 
 
@@ -16,7 +18,7 @@ def call_bear(action: '', call_id: '', params: {})
   system("open '#{uri}'")
 end
 
-def clean_up_tmp(call_id = '')
+def remove_tmp_folder(call_id = '')
   FileUtils.remove_dir(unique_tmp_folder(call_id))
 end
 
@@ -52,8 +54,20 @@ def params_to_url_params(params = {})
   end.compact.join('&')
 end
 
+def query_to_json(query_str = '', success: false)
+  res = Hash[
+    CGI::parse(query_str).map {|k, v| [k, (JSON.parse(v[0]) rescue v[0])] }
+  ]
+  res[:_success] = success
+  res.to_json
+end
+
 def translate_args_to_hash(args = [])
   Hash[args.flat_map {|s| s.scan(/^--([a-z_]+)=(.*)$/) }]
+end
+
+def unique_tmp_file(call_id = '')
+  unique_tmp_folder(call_id) + '/result.json'
 end
 
 def unique_tmp_folder(call_id = '')
@@ -62,7 +76,7 @@ def unique_tmp_folder(call_id = '')
   tmp_path
 end
 
-def validate_action!(action = '')
+def validate_action_argument!(action = '')
   if !action || action == '--help'
     print_usage
     exit 0
