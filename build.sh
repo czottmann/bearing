@@ -18,4 +18,4 @@ mkdir ./dist
   --status-item-sysfont \
   --uniform-type-identifiers 'public.item|public.folder' \
   --uri-schemes 'bearing' \
-  ./src/bearing-handler.rb
+  ./src/bearing-main.rb

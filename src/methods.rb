@@ -5,7 +5,7 @@ require 'fileutils'
 require 'json'
 require 'uri'
 
-TOOL_PATH = '/usr/local/bin/bearing'
+SHELL_INTEGRATION_PATH = '/usr/local/bin/bearing'
 
 def call_bear(action: '', call_id: '', params: {})
   uri = [
@@ -20,8 +20,8 @@ def call_bear(action: '', call_id: '', params: {})
 end
 
 def create_shell_integration
-  orig = File.dirname(__FILE__) + '/src/bearing.rb'
-  FileUtils.ln_s(orig, TOOL_PATH)
+  orig = File.dirname(__FILE__) + '/bearing-shell.rb'
+  FileUtils.ln_s(orig, SHELL_INTEGRATION_PATH)
 end
 
 def params_to_url_params(params = {})
@@ -32,14 +32,14 @@ def params_to_url_params(params = {})
 end
 
 def print_menu_items
-  option = File.exist?(TOOL_PATH) ? 'Uninstall' : 'Install'
+  option = File.exist?(SHELL_INTEGRATION_PATH) ? 'Uninstall' : 'Install'
 
   puts <<EOTXT
 DISABLED|Bearing, a scripting helper for Bear.
 DISABLED|Made with ❤️ in Munich in 2020
 DISABLED|by Carlo Zottmann <carlo@zottmann.org>
 ----
-#{option} #{TOOL_PATH}
+#{option} #{SHELL_INTEGRATION_PATH}
 ----
 DISABLED|Be excellent to eachother!
 EOTXT
@@ -79,7 +79,7 @@ def query_to_json(query_str = '', success: false)
 end
 
 def remove_shell_integration
-  FileUtils.remove(TOOL_PATH)
+  FileUtils.remove(SHELL_INTEGRATION_PATH)
 end
 
 def remove_tmp_folder(call_id = '')
