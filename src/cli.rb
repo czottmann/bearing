@@ -2,29 +2,27 @@
 
 require 'securerandom'
 require 'timeout'
-require_relative 'methods.rb'
 
-AVAILABLE_ACTIONS = %w(
-  open-note create add-text add-file tags open-tag rename-tag delete-tag trash
-  archive untagged todo today locked search grab-url change-theme change-font
-)
+require_relative 'config.rb'
+require_relative 'lib/bearing-cmd.rb'
+require_relative 'lib/bearing-comms.rb'
 
 action, *args = ARGV
 call_id = SecureRandom.uuid
 
-validate_action_argument!(action)
-
-call_bear(
+Bearing::Cmd.validate_action_argument!(action)
+Bearing::Cmd.start_app
+Bearing::Cmd.call_bear(
   action: action,
   call_id: call_id,
-  params: translate_args_to_hash(args)
+  params: Bearing::Cmd.translate_args_to_hash(args)
 )
 
 json_data = nil
 
 begin
   res = nil
-  tmp_filename = unique_tmp_file(call_id)
+  tmp_filename = Bearing::Comms.unique_tmp_file(call_id)
 
   Timeout::timeout(3) do
     while !res do
@@ -41,6 +39,6 @@ rescue Timeout::Error
   json_data = ({ _success: false, _timeout: true }).to_json
 end
 
-remove_tmp_folder(call_id)
+Bearing::Comms.remove_tmp_folder(call_id)
 
 puts json_data

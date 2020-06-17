@@ -16,6 +16,7 @@ mkdir ./dist
   --status-item-kind 'Text' \
   --status-item-title 'B' \
   --status-item-sysfont \
-  --uniform-type-identifiers 'public.item|public.folder' \
   --uri-schemes 'bearing' \
-  ./src/bearing-main.rb
+  ./src/main.rb
+
+mv ./src/Bearing.app ./dist/
