@@ -10,7 +10,7 @@ module Bearing
       def call_bear(action: '', call_id: '', params: {})
         query =
           [
-            params_to_url_params(params),
+            params_to_url_query(params),
             'x-error=' + CGI.escape("#{::URI_SCHEME}#{call_id}/error"),
             'x-success=' + CGI.escape("#{::URI_SCHEME}#{call_id}/success"),
           ].join('&')
@@ -19,7 +19,7 @@ module Bearing
         system("open '#{uri}'")
       end
 
-      def params_to_url_params(params = {})
+      def params_to_url_query(params = {})
         params.map do |k, v|
           next unless k && v
           CGI.escape(k) + '=' + CGI.escape(v)
