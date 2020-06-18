@@ -6,17 +6,18 @@ module Bearing
   module Menu
     class << self
       def print_items
-        option = File.exist?(::SHELL_INTEGRATION_PATH) ? 'Uninstall' : 'Install'
+        verb = File.exist?(::SHELL_INTEGRATION_PATH) ? 'Uninstall' : 'Install'
+        menu_entry = "#{verb} #{::SHELL_INTEGRATION_PATH}"
 
-        puts <<~EOTXT
-          DISABLED|Bearing, a scripting helper for Bear.
-          DISABLED|Made with ❤️ in Munich in 2020
-          DISABLED|by Carlo Zottmann <carlo@zottmann.org>
-          ----
-          #{option} #{::SHELL_INTEGRATION_PATH}
-          ----
-          DISABLED|Let's be excellent to eachother
-        EOTXT
+        puts [
+               'DISABLED|Bearing, a scripting helper for Bear.',
+               'DISABLED|Made with ❤️ in Munich in 2020',
+               'DISABLED|by Carlo Zottmann <carlo@zottmann.org>',
+               '----',
+               menu_entry,
+               '----',
+               "DISABLED|Let's be excellent to eachother :)",
+             ].join("\n")
       end
     end
   end
