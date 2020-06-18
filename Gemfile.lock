@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    prettier (0.18.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  prettier (~> 0.18.2)
+
+BUNDLED WITH
+   2.1.4
