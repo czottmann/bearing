@@ -7,10 +7,10 @@ require 'securerandom'
 require 'timeout'
 require 'uri'
 
-require_relative '../config.rb'
+require_relative '../config'
 
 module Bearing
-  class Comms
+  class IPC
     attr_reader :call_id
 
     def initialize(call_id: SecureRandom.uuid)
