@@ -2,7 +2,7 @@
 
 require 'fileutils'
 
-require_relative '../config.rb'
+require_relative '../config'
 
 module Bearing
   module ShellIntegration

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../config.rb'
+require_relative '../config'
 
 module Bearing
   module Menu
