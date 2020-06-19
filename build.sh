@@ -8,7 +8,7 @@ config_var() {
 }
 
 /usr/local/bin/platypus \
-  --app-icon '/Applications/Platypus.app/Contents/Resources/PlatypusDefault.icns' \
+  --app-icon './assets/appicon.icns' \
   --app-version "$(config_var VERSION)" \
   --author 'Carlo Zottmann <carlo@zottmann.org>' \
   --background \
