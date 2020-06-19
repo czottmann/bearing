@@ -120,8 +120,25 @@ Returns:
 
 ## Credits
 
-Bearing was made by Carlo Zottmann, <https://czm.io/>, <carlo@zottmann.org>. It
-is MIT-licensed, see [LICENSE.md](LICENSE.md).
+Bearing was made by Carlo Zottmann, <https://czm.io/>, <carlo@zottmann.org>.
 
-Bear is (c) Shiny Frog, Inc.  This app Bearing and its author are neither
-affiliated nor endorsed by Shiny Frog.  I'm just a fan of their product.
+
+## License
+
+MIT.  See [LICENSE.md](LICENSE.md).
+
+
+## Acknowledgements
+
+[Bear](https://bear.app/) is a neat piece of software
+(c) [Shiny Frog, Inc.](http://www.shinyfrog.net/)  Bearing and its
+author are neither affiliated nor endorsed by Shiny Frog.  I'm just a fan of
+their stuff.
+
+The Bearing app was made using [Platypus](https://sveinbjorn.org/platypus), _"a
+developer tool that creates native Mac applications from command line scripts"_
+by Sveinbjörn Þórðarson.  Platypus is dope, trust me on that.
+
+---
+
+![app icon](assets/appicon.png)
