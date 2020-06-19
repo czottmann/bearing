@@ -41,7 +41,7 @@ actual JSON results are not pretty-printed.
 ```bash
 /usr/local/bin/bearing \
   open-note \
-  --id="123D41D6-E0F1-4A74-99C2-1B80D08074B7-12345-0000A0958DF5307C"
+  --id="123D41D6-E0F1-1234-1234-1B80D08074B7-12345-0000A0958DF5307C"
 ```
 
 Returns:
@@ -52,7 +52,7 @@ Returns:
   "title": "rtomayko/posix-spawn: Ruby process spawning library",
   "is_trashed": "no",
   "note": "# rtomayko/posix-spawn: Ruby process spawning library\nhttps://github.com/rtomayko/posix-spawn\n\n…",
-  "identifier": "123D41D6-E0F1-4A74-99C2-1B80D08074B7-12345-0000A0958DF5307C",
+  "identifier": "123D41D6-E0F1-1234-1234-1B80D08074B7-12345-0000A0958DF5307C",
   "modificationDate": "2020-06-12T07:39:06Z",
   "_success": true
 }
@@ -113,6 +113,8 @@ Returns:
       "pin": "no"
     },
     …
+  ]
+}
 ```
 
 
