@@ -11,11 +11,12 @@ module Bearing
 
         puts [
                'DISABLED|Bearing, a scripting helper for Bear.',
-               'DISABLED|Made with ❤️ in Munich in 2020',
-               'DISABLED|by Carlo Zottmann <carlo@zottmann.org>',
+               "DISABLED|Version #{::VERSION}",
                '----',
                menu_entry,
                '----',
+               'DISABLED|Made with ❤️ in Munich in 2020',
+               'DISABLED|by Carlo Zottmann <carlo@zottmann.org>',
                "DISABLED|Let's be excellent to eachother :)",
              ].join("\n")
       end
