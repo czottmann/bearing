@@ -118,11 +118,10 @@ Returns:
 ```
 
 
-## Author
+## Credits
 
-Carlo Zottmann, <https://czm.io/>, <carlo@zottmann.org>
+Bearing was made by Carlo Zottmann, <https://czm.io/>, <carlo@zottmann.org>. It
+is MIT-licensed, see [LICENSE.md](LICENSE.md).
 
-
-## License
-
-**TODO**, see [LICENSE.md](LICENSE.md).
+Bear is (c) Shiny Frog, Inc.  This app Bearing and its author are neither
+affiliated nor endorsed by Shiny Frog.  I'm just a fan of their product.
