@@ -61,7 +61,7 @@ Credits:
           ::VERSION
         }.
       Made by Carlo Zottmann <carlo@zottmann.org>
-      Home @ https://gitlab.com/czottmann/bearing
+      Home @ https://carlo.github.io/bearing
 EOTXT
       end
 
