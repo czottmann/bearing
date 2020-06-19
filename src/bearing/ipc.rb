@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'cgi'
 require 'fileutils'
 require 'json'
 require 'securerandom'
@@ -17,27 +18,23 @@ module Bearing
     end
 
     def wait_for_incoming_data
-      results =
-        begin
-          res = nil
+      res = nil
 
-          Timeout.timeout(3) do
-            while !res
-              if File.exist?(unique_tmp_file)
-                res = File.read(unique_tmp_file)
-              else
-                sleep 0.4
-              end
-            end
+      Timeout.timeout(3) do
+        while !res
+          if File.exist?(unique_tmp_file)
+            res = File.read(unique_tmp_file)
+          else
+            sleep 0.4
           end
-
-          res
-        rescue Timeout::Error
-          ({ _success: false, _timeout: true }).to_json
         end
+      end
 
-      FileUtils.remove_dir(unique_tmp_folder)
-      results
+      res
+    rescue Timeout::Error
+      ({ _success: false, _timeout: true }).to_json
+    ensure
+      # FileUtils.remove_dir(unique_tmp_folder)
     end
 
     def write_incoming_data_to_tmp_file(uri_string = '')

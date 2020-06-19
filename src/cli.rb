@@ -1,9 +1,9 @@
 #!/usr/bin/ruby
 
 require_relative 'config'
-require_relative 'lib/bearing-bear'
-require_relative 'lib/bearing-cmd'
-require_relative 'lib/bearing-ipc'
+require_relative 'bearing/bear'
+require_relative 'bearing/cmd'
+require_relative 'bearing/ipc'
 
 action, *args = ARGV
 ipc = Bearing::IPC.new

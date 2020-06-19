@@ -2,7 +2,7 @@
 
 require 'uri'
 
-require_relative 'bearing-ipc'
+require_relative 'ipc'
 
 module Bearing
   module IncomingURICall

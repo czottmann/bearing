@@ -3,8 +3,8 @@
 require 'uri'
 
 require_relative '../config'
-require_relative 'bearing-incoming-uri-call'
-require_relative 'bearing-shell-integration'
+require_relative 'incoming-uri-call'
+require_relative 'shell-integration'
 
 module Bearing
   module Routing
