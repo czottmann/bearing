@@ -22,5 +22,5 @@ AVAILABLE_BEAR_ACTIONS = %w[
   change-font
 ]
 SHELL_INTEGRATION_PATH = '/usr/local/bin/bearing'
-URI_SCHEME = 'bearing://'
+URI_SCHEME = 'bearing'
 VERSION = '2020.06.18'

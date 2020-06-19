@@ -10,7 +10,7 @@ module Bearing
   module Routing
     class << self
       def handle(arg = '')
-        if arg.start_with?(::URI_SCHEME)
+        if arg.start_with?(::URI_SCHEME + '://')
           Bearing::IncomingURICall.handle(arg)
         elsif arg.start_with?('Install')
           Bearing::ShellIntegration.install

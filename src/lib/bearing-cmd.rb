@@ -11,8 +11,8 @@ module Bearing
         query =
           [
             params_to_url_query(params),
-            'x-error=' + CGI.escape("#{::URI_SCHEME}#{call_id}/error"),
-            'x-success=' + CGI.escape("#{::URI_SCHEME}#{call_id}/success"),
+            'x-error=' + CGI.escape("#{::URI_SCHEME}://#{call_id}/error"),
+            'x-success=' + CGI.escape("#{::URI_SCHEME}://#{call_id}/success"),
           ].join('&')
         uri = ['bear://x-callback-url/', action, '?', query].join('')
 
@@ -33,7 +33,7 @@ Usage: #{
         } ACTION [parameters]
 
       ACTION: The Bear action to call (e.g., 'open-note', 'create', 'add-text',
-              etc.)"
+              etc.)
 
       Parameters are passed in the form 'key=value', e.g. 'title="My new note"'.
       See https://bear.app/faq/X-callback-url%20Scheme%20documentation/ for
