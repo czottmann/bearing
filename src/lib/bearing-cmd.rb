@@ -1,33 +1,10 @@
 # frozen_string_literal: true
 
-require 'erb'
-
 require_relative '../config'
 
 module Bearing
   module Cmd
     class << self
-      include ERB::Util
-
-      def call_bear(action: '', call_id: '', params: {})
-        response_base = "#{::URI_SCHEME}://#{call_id}"
-        query =
-          [
-            params_to_url_query(params),
-            'x-error=' + url_encode(response_base + '/error'),
-            'x-success=' + url_encode(response_base + '/success'),
-          ].join('&')
-
-        system("open 'bear://x-callback-url/#{action}?#{query}'")
-      end
-
-      def params_to_url_query(params = {})
-        params.map do |k, v|
-          next unless k && v
-          url_encode(k) + '=' + url_encode(v)
-        end.compact.join('&')
-      end
-
       def print_usage
         puts <<EOTXT
 Usage: #{
@@ -70,10 +47,6 @@ EOTXT
       def start_app
         # Start the app bundle so the first call to Bear won't time out
         system("open -b #{::APP_BUNDLE_ID}")
-      end
-
-      def translate_args_to_hash(args = [])
-        Hash[args.flat_map { |s| s.scan(/^--([a-z_]+)=(.*)$/) }]
       end
 
       def validate_action_argument!(action = '')
