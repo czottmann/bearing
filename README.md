@@ -119,6 +119,18 @@ Returns:
 ```
 
 
+## Installation
+
+Download [a release](https://github.com/carlo/bearing/releases), unpack it, move
+`Bearing.app` to your Applications folder, start it.
+
+Bearing is a menubar app, its icon is a "B". Click the icon, and select
+_"Install /usr/local/bin/bearing"_ from the menu.  This will install a symlink
+in `/usr/local/bin/`.
+
+Now you can run `bearing` from your shell.
+
+
 ## Credits
 
 Bearing was made by Carlo Zottmann, <https://czm.io/>, <carlo@zottmann.org>.
