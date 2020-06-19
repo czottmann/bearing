@@ -23,4 +23,4 @@ AVAILABLE_BEAR_ACTIONS = %w[
 ]
 SHELL_INTEGRATION_PATH = '/usr/local/bin/bearing'
 URI_SCHEME = 'bearing'
-VERSION = '2020.06.18'
+VERSION = '2020.06.19'
