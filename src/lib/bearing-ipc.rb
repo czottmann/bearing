@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'cgi'
 require 'fileutils'
 require 'json'
 require 'securerandom'
