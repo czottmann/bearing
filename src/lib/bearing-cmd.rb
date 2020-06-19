@@ -1,28 +1,30 @@
 # frozen_string_literal: true
 
-require 'cgi'
+require 'erb'
 
 require_relative '../config'
 
 module Bearing
   module Cmd
     class << self
+      include ERB::Util
+
       def call_bear(action: '', call_id: '', params: {})
+        response_base = "#{::URI_SCHEME}://#{call_id}"
         query =
           [
             params_to_url_query(params),
-            'x-error=' + CGI.escape("#{::URI_SCHEME}://#{call_id}/error"),
-            'x-success=' + CGI.escape("#{::URI_SCHEME}://#{call_id}/success"),
+            'x-error=' + url_encode(response_base + '/error'),
+            'x-success=' + url_encode(response_base + '/success'),
           ].join('&')
-        uri = ['bear://x-callback-url/', action, '?', query].join('')
 
-        system("open '#{uri}'")
+        system("open 'bear://x-callback-url/#{action}?#{query}'")
       end
 
       def params_to_url_query(params = {})
         params.map do |k, v|
           next unless k && v
-          CGI.escape(k) + '=' + CGI.escape(v)
+          url_encode(k) + '=' + url_encode(v)
         end.compact.join('&')
       end
 
@@ -66,7 +68,7 @@ EOTXT
       end
 
       def start_app
-        # Start the app bundle so the first call Bear doesn't time out
+        # Start the app bundle so the first call to Bear won't time out
         system("open -b #{::APP_BUNDLE_ID}")
       end
 
