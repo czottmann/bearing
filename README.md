@@ -9,8 +9,9 @@ meaning you call a URI
 to do things.  Bearing adds to that by slightly abstracting and enhancing the
 experience:
 
-1. You get a dedicated `bearing` CLI tool.
-2. Bearing returns callback responses as JSON.
+1. There's a dedicated `bearing` CLI tool that accepts plain arguments.  You
+   don't have to URL-encode anything.
+2. The CLI tool returns callback responses as JSON.
 
 
 ## Usage
@@ -24,7 +25,7 @@ etc.)
 
 Parameters are passed as 'key=value' pairs, e.g. 'title="My new note"'. See
 [Bear's API documentation](https://bear.app/faq/X-callback-url%20Scheme%20documentation/)
-for available parameters.
+for available actions and parameters.
 
 Bearing consists of both an unobtrusive statusbar app and a CLI component.
 The former will automatically open when the latter is used; it is needed for
